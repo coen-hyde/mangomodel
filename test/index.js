@@ -1,6 +1,6 @@
 var should = require('should')
   , Monk = require('monk')
-	, MangoModel = require('../lib/mangomodel.js')
+	, MangoModel = require('../index.js')
   , fixtures = require('./data/mongo_fixtures.js')
   , ObjectId = require('mongodb/node_modules/bson').ObjectID;
 
@@ -58,6 +58,30 @@ describe('MangoModel', function(){
     var Cats = MangoModel.model('cats');
     Cats.should.have.property('echo');
     Cats.echo().should.eql('cats');
+    done();
+  });
+  it('should validate data', function(done) {
+    var Dogs = MangoModel.create(db, 'dogs', {
+      schema: {
+        properties: {
+          breed: {
+            description: 'the breed of the dog'
+          , type: 'string'
+          , required: true
+          }
+        , name: {
+            description: 'the name of the dog'
+          , type: 'string'
+          , required: true
+          }
+        }
+      }
+    });
+
+    var result = Dogs.validate({});
+    result.should.have.property('valid', false);
+    result.should.have.property('errors');
+    result.errors[0].should.have.property('property', 'breed');
     done();
   });
 });

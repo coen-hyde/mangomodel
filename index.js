@@ -52,10 +52,15 @@ MangoModel.prototype.getCollection = function() {
 };
 
 MangoModel.prototype.validate = function(data) {
-  // body...
+  var schema = {};
+  if (this.modelDefinition.hasOwnProperty('schema')) {
+    schema = this.modelDefinition.schema;
+  }
+
+  return revalidator.validate(data, schema);
 };
 
-
+// Copy across all functionality that Monk has
 var collectionMethods = Object.keys(MonkCollection.prototype);
 
 collectionMethods.forEach(function(name) {
