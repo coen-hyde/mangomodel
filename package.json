@@ -10,9 +10,8 @@
   "version": "0.0.1",
   "dependencies": {
     "monk": "0.3.x",
-    "async": "0.1.x",
     "revalidator": "0.1.x",
-    "moment":"1.7.x"
+    "moment": "1.7.x"
   },
   "devDependencies": {
     "mocha": "1.5.x",
@@ -22,5 +21,15 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/coen-hyde/mangomodel.git"
-  }
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "mongodb",
+    "monk"
+  ],
+  "author": "Coen Hyde",
+  "license": "BSD"
 }

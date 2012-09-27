@@ -1,6 +1,6 @@
 var revalidator = require('revalidator')
-	, moment = require('moment')
-	, MonkCollection = require('monk/lib/collection');
+  , moment = require('moment')
+  , MonkCollection = require('monk/lib/collection');
 
 var MangoModel = function(db, collection, modelDefinition) {
   if (db.hasOwnProperty('driver')) {
@@ -13,7 +13,7 @@ var MangoModel = function(db, collection, modelDefinition) {
     this.getDb = db;
   }
 
-	this.modelDefinition = modelDefinition || {};
+  this.modelDefinition = modelDefinition || {};
   this.modelDefinition.collection = collection;
 
   // Copy user defined methods on to model
@@ -48,7 +48,7 @@ MangoModel.model = function(collection) {
 }
 
 MangoModel.prototype.getCollection = function() {
-	return this.getDb().get(this.modelDefinition.collection);
+  return this.getDb().get(this.modelDefinition.collection);
 };
 
 MangoModel.prototype.validate = function(data) {
@@ -67,4 +67,4 @@ collectionMethods.forEach(function(name) {
   }
 });
 
-module.exports = MangoModel
+module.exports = MangoModel;
