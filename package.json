@@ -7,7 +7,7 @@
   "engines": {
     "node": "v0.8.x"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
     "monk": "0.3.x",
     "revalidator": "0.1.x",

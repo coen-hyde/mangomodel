@@ -3,7 +3,12 @@ var revalidator = require('revalidator')
   , MonkCollection = require('monk/lib/collection');
 
 var MangoModel = function(db, collection, modelDefinition) {
-  if (db.hasOwnProperty('driver')) {
+  if (db === null) {
+    this.getDb = function() {
+      return MangoModel.globalDb;
+    }
+  }
+  else if (db.hasOwnProperty('driver')) {
     this.getDb = function() {
       return db;
     }
@@ -24,6 +29,7 @@ var MangoModel = function(db, collection, modelDefinition) {
   }
 };
 
+MangoModel.globalDb = null;
 MangoModel.setDb = function(db) {
   this.globalDb = db;
 };
@@ -34,7 +40,7 @@ MangoModel.create = function(db, collection, modelDefinition) {
   if (typeof(arguments[0]) === 'string') {
     var modelDefinition = collection;
     var collection = db;
-    var db = MangoModel.globalDb;
+    var db = null;
   }
   
   MangoModel.models[collection] = new this(db, collection, modelDefinition);
