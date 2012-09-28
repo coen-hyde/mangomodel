@@ -35,12 +35,24 @@ describe('MangoModel', function(){
     MangoModel.setDb(db);
 
     var Ants = MangoModel.create('ants');
-    done();
-    // Ants.findById('aa0000000000000000000004', function(err, doc) {
-    //   should.not.exist(err);
-    //   doc._id.should.eql(ObjectId('aa0000000000000000000004'));
-    //   done();
-    // });
+    Ants.findById('aa0000000000000000000004', function(err, doc) {
+      should.not.exist(err);
+      doc._id.should.eql(ObjectId('aa0000000000000000000004'));
+      done();
+    });
+  });
+  it('should be able to create a model with function set as global db', function(done) {
+    MangoModel.models.should.have.length(0);
+    MangoModel.setDb(function() {
+      return db;
+    });
+
+    var Ants = MangoModel.create('ants');
+    Ants.findById('aa0000000000000000000004', function(err, doc) {
+      should.not.exist(err);
+      doc._id.should.eql(ObjectId('aa0000000000000000000004'));
+      done();
+    });
   });
   it('should not be able to retrieve a model that does not exist', function() {
     var Worms = MangoModel.model('worms');

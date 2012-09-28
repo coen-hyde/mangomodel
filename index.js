@@ -5,7 +5,7 @@ var revalidator = require('revalidator')
 var MangoModel = function(db, collection, modelDefinition) {
   if (db === null) {
     this.getDb = function() {
-      return MangoModel.globalDb;
+      return MangoModel.globalDb();
     }
   }
   else if (db.hasOwnProperty('driver')) {
@@ -31,7 +31,14 @@ var MangoModel = function(db, collection, modelDefinition) {
 
 MangoModel.globalDb = null;
 MangoModel.setDb = function(db) {
-  this.globalDb = db;
+  if (db.hasOwnProperty('driver')) {
+    this.globalDb = function() {
+      return db;
+    }
+  }
+  else {
+    this.globalDb = db;
+  }
 };
 
 MangoModel.models = {};
