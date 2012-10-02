@@ -23,9 +23,7 @@ var MangoModel = function(db, collection, modelDefinition) {
 
   // Copy user defined methods on to model
   if (this.modelDefinition.hasOwnProperty('methods')) {
-    for (var name in this.modelDefinition.methods) {
-      this[name] = this.modelDefinition.methods[name].bind(this);
-    }
+    this.methods(this.modelDefinition.methods);
   }
 };
 
@@ -59,6 +57,12 @@ MangoModel.model = function(collection) {
     return MangoModel.models[collection];
   }
 }
+
+MangoModel.prototype.methods = function(methods) {
+  for (var name in methods) {
+    this[name] = methods[name].bind(this);
+  }
+};
 
 MangoModel.prototype.getCollection = function() {
   return this.getDb().get(this.modelDefinition.collection);
