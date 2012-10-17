@@ -16,7 +16,8 @@
   "devDependencies": {
     "mocha": "1.5.x",
     "should": "1.2.x",
-    "mongodb": "1.1.x"
+    "mongodb": "1.1.x",
+    "async": "~0.1.22"
   },
   "repository": {
     "type": "git",
