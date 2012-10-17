@@ -85,7 +85,7 @@ collectionMethods.forEach(function(name) {
     var args = Array.prototype.slice.call(arguments);
     var collection = this.getCollection();
     var colFn = collection[name];
-    colFn.apply(collection, args);
+    return colFn.apply(collection, args);
   }
 });
 
